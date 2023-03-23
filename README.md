@@ -1,4 +1,4 @@
-# Netlogo Models of Developer Interaction ( Under Construction)
+# Netlogo Models of Developer Interaction
 Agent based models of developer interaction in large scale software ecosystems. The finished model will show the graphs of some social network properties like Connection, Clustering and Separation.
 
 # Tools Used
