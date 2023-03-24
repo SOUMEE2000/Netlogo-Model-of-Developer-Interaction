@@ -165,7 +165,7 @@ num-people
 num-people
 0
 50
-15.0
+29.0
 1
 1
 NIL
@@ -197,7 +197,7 @@ Rate-of-connection
 Rate-of-connection
 0
 1
-0.18
+0.4
 0.01
 1
 NIL
@@ -293,13 +293,13 @@ NIL
 @#$#@#$#@
 ## WHAT IS IT?
 
-## WHAT IS IT?
+
 
 1. [num-teams] exist
 2. [num-people] exist in each team
 3. A manager exists for each team and all the managers are connected
-4. Each time rate-of-connection * number of people in team connections are added in all teams
-5. Each time [add-people] number of people are added in a team
+4. Each time rate-of-connection * number of people in team connections are added **in a team**
+5. Each time [add-people] number of people are added **in all the teams**
 6. Graph shows [ 2* number-of edges/ number-of-vertices ] as Degree of Connection
 @#$#@#$#@
 default
