@@ -269,23 +269,12 @@ count turtles
 @#$#@#$#@
 ## WHAT IS IT?
 
-;to go
-;  ask one-of turtles with [color = red][
-;    if count my-links >= num-people
-;    [set color green]
-;    let num (Rate-of-connection * num-people)
-;    create-links-to n-of num other turtles with [color = red ]
-;  ]
-;  tick
-;end
-
-while [num != 0]
-    [
-      ask one-of other turtles with [team-number = [team-number] of myself and ]
-      [
-         set num 0    
-      ]
-    ]
+1. [num-teams] exist
+2. [num-people] exist in each team
+3. A manager exists for each team and all the managers are connected
+4. Each time rate-of-connection * number of people in team connections are added in the team
+5. Each time [add-people] number of people are added in a team
+6. Graph shows [ 2* number-of edges/ number-of-vertices ] as Degree of Connection
 @#$#@#$#@
 default
 true
