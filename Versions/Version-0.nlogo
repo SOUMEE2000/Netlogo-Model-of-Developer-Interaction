@@ -72,7 +72,9 @@ end
 
 to add-new-people
   ;repeat add-people[
-    ask one-of turtles [hatch add-people]
+    ask one-of turtles [
+    hatch add-people
+    print team-number]
   ;]
 end
 
@@ -190,7 +192,7 @@ Rate-of-connection
 Rate-of-connection
 0
 1
-0.52
+0.4
 0.01
 1
 NIL
