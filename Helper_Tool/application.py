@@ -65,6 +65,5 @@ with tab2:
         #     count += 1
         st.pyplot(fig)
         img = io.BytesIO()
-        i.savefig(img, format='png')
         fig.savefig(img, format='png')
         st.download_button(label = "Download", data=img, mime="image/png", key = count)
