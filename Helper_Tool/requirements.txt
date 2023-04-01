@@ -1,4 +1,4 @@
 matplotlib
 streamlit
-csv
+python-csv
 numpy
