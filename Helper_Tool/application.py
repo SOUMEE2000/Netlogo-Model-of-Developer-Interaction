@@ -21,7 +21,7 @@ with st.sidebar:
     st.write(" ")
     st.write(" ")
     num_params = st.text_input(label = "No. of Parameters")
-    extract_button = st.button("Extract Info", disabled = st.session_state["uploaded_files"] and int(st.session_state["num_params"]))
+    extract_button = st.button("Extract Info", disabled = not st.session_state["uploaded_files"] and int(st.session_state["num_params"]))
     if num_params and extract_button == 1:
         st.session_state["extract_button"] = 1
         st.session_state["num_params"] = num_params
@@ -31,6 +31,7 @@ tab1, tab2 = st.tabs(["**Parameter Space**","**Plots**"])
 
 with tab1:
     if st.session_state["extract_button"] == 1 and st.session_state["uploaded_files"] == 1:
+        st.write("**Write the values of the parameter you want to see varied in comma separated values**")
         doc = uploaded_files.getvalue().decode('utf-8').split("\r\n")
         obj = bf()
         param_map = obj.parse_csv(doc, int(st.session_state["num_params"]))
@@ -38,7 +39,11 @@ with tab1:
         length = -1000000
         for i in param_map:
             if i != "[run number]":
-                lst = st.text_input(label = i, key = i)
+                col1, col2, col3, col4 = st.columns([4,1,1,1])
+                with col1: lst = st.text_input(label = i, key = i)
+                with col2: st.metric(label="Max:", value=str(param_map[i][0]))
+                with col3: st.metric(label="Min:", value=str(param_map[i][1]))
+                with col4: st.metric(label="Steps:", value=str(param_map[i][2]))
                 if len(lst) != 0:
                     lst = list(map(float, lst.split(",")))
                     reqd_params.append(lst)
@@ -49,7 +54,7 @@ with tab1:
 
 with tab2:
     if st.session_state["plotted"] == 1:
-        st.session_state["plotted"] = 0
+        #st.session_state["plotted"] = 0
         #if "graph_in" not in st.session_state:
         #    st.session_state["graph_in"] = []
 

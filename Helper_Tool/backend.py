@@ -16,7 +16,12 @@ class Backend_functions:
         for row in doc:
             row = row.replace("\"","").split(",")
             if line_count > 6 and line_count <= 6 + num_params + 1 and len(row) != 0:
-                self.param_map[row[0]] = self.param_map.get(row[0], key)
+                step = 0
+                for i in range(1,len(row)):
+                    step = float(row[i]) - float(row[1])
+                    if step >0:
+                        break
+                self.param_map[row[0]] = self.param_map.get(row[0], [float(row[-1]), float(row[1]), step])
                 lst = list(map(float, row[1:]))
                 self.param_list.append(lst)
                 key += 1
