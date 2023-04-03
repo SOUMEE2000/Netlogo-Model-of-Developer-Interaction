@@ -53,7 +53,7 @@ with tab2:
         #if "graph_in" not in st.session_state:
         #    st.session_state["graph_in"] = []
 
-        fig = obj.plot_val(reqd_params, length)
+        title, fig = obj.plot_val(reqd_params, length)
         #st.session_state["graph_in"].append(fig)
         #print(st.session_state["graph_in"])
         count = 0
@@ -66,4 +66,4 @@ with tab2:
         st.pyplot(fig)
         img = io.BytesIO()
         fig.savefig(img, format='png')
-        st.download_button(label = "Download", data=img, mime="image/png", key = count)
+        st.download_button(label = "Download", data=img, mime="image/png", key = count, file_name=title)

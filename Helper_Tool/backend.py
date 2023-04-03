@@ -49,8 +49,8 @@ class Backend_functions:
         plt.title(title)
         plt.legend(legend)
         #plt.figure(figsize=(8, 8))
-        
-        return plt
+
+        return title, plt
 
     def plot_util(self, reqd_params, length):
         title = ""
