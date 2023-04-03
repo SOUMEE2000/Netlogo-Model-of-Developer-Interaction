@@ -22,6 +22,6 @@ streamlit run application.py
 * Number of people to be added to be th team after each tick.
 
 <p>
-<img src="https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/blob/main/Images/Interface.png?raw=true" height = "400">
+<img src="https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/blob/main/Images/Interface.png?raw=true" height = "300">
 <img src="https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/blob/main/Images/Graph-of-Connection.jpg?raw=true" height = "300">
 </p>
