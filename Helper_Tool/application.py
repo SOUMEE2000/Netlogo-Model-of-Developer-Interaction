@@ -71,4 +71,4 @@ with tab2:
         st.pyplot(fig)
         img = io.BytesIO()
         fig.savefig(img, format='png')
-        st.download_button(label = "Download", data=img, mime="image/png", key = count, file_name=title)
+        st.download_button(label = "Download", data=img, mime="image/png", key = count, file_name=str(title)+".png")
