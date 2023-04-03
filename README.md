@@ -7,11 +7,12 @@ Netlogo spills out csv data while running experiments on model parameters. Howev
 pip install -r requirements.txt
 streamlit run application.py
 ```
-<p>
 ### Screenshots of the Tool
+<p>
 <img src="https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/blob/main/Images/Interface_Helper.png?raw=true" height = "400" width = "500">
 <img src="https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/blob/main/Images/Output_Helper.png?raw=true" height = "400" width="500">
 </p>
+
 # Main Model
 
 **[Netlogo](https://ccl.northwestern.edu/netlogo/download.shtml).** This is an agent-based modelling software to simulate real world problems. Displayed beneath are pictures of the interface and the output graphs displaying the Degree of Connection. The model has 4 parameters:
