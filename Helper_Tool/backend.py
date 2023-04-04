@@ -17,15 +17,24 @@ class Backend_functions:
             row = row.replace("\"","").split(",")
             if line_count > 6 and line_count <= 6 + num_params + 1 and len(row) != 0:
                 step = 0
+                maximum = -10000000
+                minimum = 10000000
+                flag = 1
                 for i in range(1,len(row)):
-                    step = float(row[i]) - float(row[1])
-                    if step >0:
-                        break
-                self.param_map[row[0]] = self.param_map.get(row[0], [float(row[-1]), float(row[1]), step])
+                    if float(row[i]) - float(row[1]) > 0 and flag:
+                        step = float(row[i]) - float(row[1])
+                        flag = 0
+                    maximum = max(float(row[i]), maximum)
+                    minimum = min(float(row[i]), minimum)
+
+                self.param_map[row[0]] = self.param_map.get(row[0], [maximum, minimum, step])
+                print(maximum, minimum, step)
+                print(len(row))
                 lst = list(map(float, row[1:]))
                 self.param_list.append(lst)
                 key += 1
             elif line_count > 6 + num_params + 1 and len(row) != 0 and row[0] == "":
+
                 self.run_data.append(list(map(float, row[1:])))
             line_count += 1
         self.run_data = self.run_data[1:-2]
