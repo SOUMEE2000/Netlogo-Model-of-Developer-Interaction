@@ -1,3 +1,4 @@
+extensions [ nw ]
 globals [colour counter node2-list existing-connections]
 turtles-own [ team-number manager? visited?]
 
@@ -30,32 +31,58 @@ to-report Degree-of-Clustering
   let sum-clustering 0
 
   ask turtles [ set visited? false ]
-  ask turtles
+  ask turtles with [count link-neighbors > 1]
   [
     let myNeighbors  link-neighbors
-    if count myNeighbors > 1
+
+    let Kv ( count myNeighbors )
+    let possibleEdges ( Kv * ( Kv - 1) / 2 )
+
+    let actualEdges 0
+    ask myNeighbors [ set visited? true ]
+
+    ask myNeighbors
     [
-      let Kv ( count myNeighbors )
-      let possibleEdges ( Kv * ( Kv - 1) / 2 )
-      let actualEdges 0
-      ask myNeighbors [ set visited? true ]
-
-      ask myNeighbors
-      [
-        set actualEdges ( actualEdges + ( count link-neighbors with [ visited? = true] ) )
-      ]
-
-      set actualEdges ( actualEdges / 2 )
-      let clustering ( actualEdges / possibleEdges )
-      set sum-clustering (sum-clustering + clustering)
+      set actualEdges ( actualEdges + ( count link-neighbors with [ visited? = true] ) )
     ]
+
+    ask myNeighbors [ set visited? false ]
+
+    set actualEdges ( actualEdges / 2 )
+    let clustering ( actualEdges / possibleEdges )
+    set sum-clustering (sum-clustering + clustering)
+
   ]
 
   let count-turtles ( count turtles )
   report sum-clustering / count-turtles
+  ;report mean [ nw:clustering-coefficient ] of turtles
 end
 
+to-report shortest-dist [node1 node2]
+  let dist 0
+  ask node1 [ set dist nw:distance-to node2 ]
 
+  if dist = false
+  [ set dist 0]
+  report dist
+end
+
+to-report Degree-of-Separation
+  let sum-separation 0
+
+  ask turtles with [count link-neighbors > 0 ]
+  [
+     let other-turtles ( other turtles )
+     foreach [self] of other-turtles
+     [
+       x -> set sum-separation sum-separation + ( shortest-dist self x )
+     ]
+
+  ]
+  set sum-separation ( sum-separation / 2 )
+  report sum-separation / ( count turtles )
+end
 
 ; SETUP PROCEDURES
 
@@ -342,18 +369,36 @@ Rate-of-interTeam-connection
 Rate-of-interTeam-connection
 0
 1
-0.1
+0.05
 0.05
 1
 NIL
 HORIZONTAL
 
 PLOT
-219
+211
 308
-419
+411
 458
 Degree of Clustering
+NIL
+NIL
+0.0
+10.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -13345367 true "" "plot Degree-of-Clustering"
+
+PLOT
+420
+309
+620
+459
+Degree of Separation
 NIL
 NIL
 0.0
@@ -364,7 +409,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -13345367 true "" "plot Degree-of-Clustering"
+"default" 1.0 0 -5825686 true "" "plot Degree-of-Separation"
 
 @#$#@#$#@
 ## WHAT IS IT?
