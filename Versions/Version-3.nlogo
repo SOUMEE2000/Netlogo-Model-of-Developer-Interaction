@@ -1,19 +1,22 @@
-globals [colour counter node2-list]
+extensions [ nw ]
+globals [colour counter node2-list existing-connections]
 turtles-own [ team-number manager? visited?]
 
 to setup
   clear-all
   setup-nodes
   setup-manager-links
+  ;print existing-connections
   reset-ticks
 end
 
 
 
 to go
-
   make-team-connections
+  make-inter-team-connections
   add-new-people
+  ;print existing-connections
   tick
 end
 
@@ -24,6 +27,62 @@ to-report Degree-of-Connection
   report connection
 end
 
+to-report Degree-of-Clustering
+  let sum-clustering 0
+
+  ask turtles [ set visited? false ]
+  ask turtles with [count link-neighbors > 1]
+  [
+    let myNeighbors  link-neighbors
+
+    let Kv ( count myNeighbors )
+    let possibleEdges ( Kv * ( Kv - 1) / 2 )
+
+    let actualEdges 0
+    ask myNeighbors [ set visited? true ]
+
+    ask myNeighbors
+    [
+      set actualEdges ( actualEdges + ( count link-neighbors with [ visited? = true] ) )
+    ]
+
+    ask myNeighbors [ set visited? false ]
+
+    set actualEdges ( actualEdges / 2 )
+    let clustering ( actualEdges / possibleEdges )
+    set sum-clustering (sum-clustering + clustering)
+
+  ]
+
+  let count-turtles ( count turtles )
+  report sum-clustering / count-turtles
+  ;report mean [ nw:clustering-coefficient ] of turtles
+end
+
+to-report shortest-dist [node1 node2]
+  let dist 0
+  ask node1 [ set dist nw:distance-to node2 ]
+
+  if dist = false
+  [ set dist 0]
+  report dist
+end
+
+to-report Degree-of-Separation
+  let sum-separation 0
+
+  ask turtles with [count link-neighbors > 0 ]
+  [
+     let other-turtles ( other turtles )
+     foreach [self] of other-turtles
+     [
+       x -> set sum-separation sum-separation + ( shortest-dist self x )
+     ]
+
+  ]
+  set sum-separation ( sum-separation / 2 )
+  report sum-separation / ( count turtles )
+end
 
 ; SETUP PROCEDURES
 
@@ -54,6 +113,8 @@ to add-edge [ node1 node2]
     ifelse link-neighbor? node2 or node1 = node2
     [ stop ]
     [ create-link-with node2 ]
+
+    set existing-connections (existing-connections + 1)
   ]
 end
 
@@ -67,6 +128,8 @@ to setup-manager-links
     ]
     ask links [set color black]
 end
+
+
 
 ; GO PROCEDURES
 
@@ -99,6 +162,35 @@ to make-team-connections
       ask self [
         if not link-neighbor? node2[
           create-link-with node2
+          set existing-connections (existing-connections + 1)
+          set num (num - 1)
+        ]
+      ask node2 [ set visited? true]
+      ]
+    ]
+  ]
+end
+
+to make-inter-team-connections
+  ask turtles [ set visited? false]
+  ask one-of turtles
+  [
+
+    set visited? true
+    let num (Rate-of-interTeam-connection * existing-connections)
+
+
+    while [ num > 0 ]
+    [
+
+      let node2 one-of other turtles with [visited?  = false]
+
+      if node2 = nobody
+      [ stop ]
+      ask self [
+        if not link-neighbor? node2[
+          create-link-with node2
+          set existing-connections (existing-connections + 1)
           set num (num - 1)
         ]
       ask node2 [ set visited? true]
@@ -108,10 +200,10 @@ to make-team-connections
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-253
+325
 10
-612
-370
+606
+292
 -1
 -1
 13.0
@@ -124,10 +216,10 @@ GRAPHICS-WINDOW
 1
 1
 1
--13
-13
--13
-13
+-10
+10
+-10
+10
 0
 0
 1
@@ -135,9 +227,9 @@ ticks
 30.0
 
 BUTTON
-30
+61
 21
-93
+124
 54
 NIL
 setup\n
@@ -152,24 +244,24 @@ NIL
 1
 
 SLIDER
-13
-124
-124
-157
+10
+145
+121
+178
 num-people
 num-people
 0
 50
-2.0
+10.0
 1
 1
 NIL
 HORIZONTAL
 
 BUTTON
-99
+130
 21
-162
+193
 54
 NIL
 go
@@ -184,15 +276,15 @@ NIL
 1
 
 SLIDER
-13
-166
-126
-199
+10
+187
+123
+220
 Rate-of-connection
 Rate-of-connection
 0
 1
-0.3
+0.2
 0.01
 1
 NIL
@@ -217,25 +309,25 @@ PENS
 "default" 1.0 0 -8053223 true "" "plot Degree-of-Connection"
 
 SLIDER
-12
-208
-128
-241
+131
+145
+247
+178
 num-teams
 num-teams
 0
 100
-19.0
+10.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-10
-252
-129
-285
+132
+186
+251
+219
 add-people
 add-people
 0
@@ -247,9 +339,9 @@ NIL
 HORIZONTAL
 
 MONITOR
-13
+44
 72
-86
+117
 117
 NIL
 count links
@@ -258,9 +350,9 @@ count links
 11
 
 MONITOR
-103
+134
 71
-188
+219
 116
 NIL
 count turtles
@@ -268,17 +360,73 @@ count turtles
 1
 11
 
+SLIDER
+26
+229
+237
+262
+Rate-of-interTeam-connection
+Rate-of-interTeam-connection
+0
+1
+0.05
+0.05
+1
+NIL
+HORIZONTAL
+
+PLOT
+211
+308
+411
+458
+Degree of Clustering
+NIL
+NIL
+0.0
+10.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -13345367 true "" "plot Degree-of-Clustering"
+
+PLOT
+420
+309
+620
+459
+Degree of Separation
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -5825686 true "" "plot Degree-of-Separation"
+
 @#$#@#$#@
 ## WHAT IS IT?
 
-
-
-1. [num-teams] exist
-2. [num-people] exist in each team
-3. A manager exists for each team and all the managers are connected
-4. Each time rate-of-connection * number of people in team connections are added **in a team**
+1. [num-teams] that exist
+2. [num-people] that exist in each team
+3. Each time [rate-of-interTeam-Connection] * number of edges are added **in a team**
+4. Each time [rate-of-connection] * number of people in team connections are added **in a team**
 5. Each time [add-people] number of people are added **in a team**
-6. Graph shows [ 2* number-of edges/ number-of-vertices ] as Degree of Connection
+
+
+## Reporters
+Degree of Connection
+Degree of Clustering
+
+## Additional Notes
+A manager exists for each team and all the managers are connected
 @#$#@#$#@
 default
 true
@@ -660,21 +808,62 @@ NetLogo 6.3.0
     <steppedValueSet variable="num-teams" first="1" step="1" last="20"/>
     <steppedValueSet variable="num-people" first="1" step="1" last="20"/>
   </experiment>
-  <experiment name="experiment" repetitions="1" runMetricsEveryStep="true">
+  <experiment name="experiment-5" repetitions="1" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
-    <metric>count turtles</metric>
+    <timeLimit steps="150"/>
+    <metric>Degree-of-Connection</metric>
+    <metric>Degree-of-Clustering</metric>
     <enumeratedValueSet variable="Rate-of-connection">
+      <value value="0.1"/>
+      <value value="0.2"/>
       <value value="0.3"/>
+      <value value="0.4"/>
+      <value value="0.5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="add-people">
       <value value="5"/>
     </enumeratedValueSet>
+    <enumeratedValueSet variable="Rate-of-interTeam-connection">
+      <value value="0.1"/>
+    </enumeratedValueSet>
     <enumeratedValueSet variable="num-teams">
-      <value value="19"/>
+      <value value="10"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="num-people">
+      <value value="10"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="experiment-6" repetitions="1" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="150"/>
+    <metric>Degree-of-Connection</metric>
+    <metric>Degree-of-Clustering</metric>
+    <metric>Degree-of-Separation</metric>
+    <enumeratedValueSet variable="Rate-of-connection">
+      <value value="0.1"/>
+      <value value="0.2"/>
+      <value value="0.3"/>
+      <value value="0.4"/>
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="add-people">
       <value value="2"/>
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Rate-of-interTeam-connection">
+      <value value="0"/>
+      <value value="0.1"/>
+      <value value="0.15"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="num-teams">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="num-people">
+      <value value="10"/>
+      <value value="20"/>
+      <value value="30"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>
