@@ -90,8 +90,8 @@ to-report Degree-of-Separation
         ]
 
      ]
-     set sum-separation ( sum-separation / 2 )
-     report sum-separation / ( count turtles )
+
+     report sum-separation / ( ( count turtles ) * (count turtles - 1) )
   ]
   report 0
 end

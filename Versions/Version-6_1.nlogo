@@ -1,5 +1,5 @@
 extensions [ nw ]
-globals [colour counter node2-list existing-connections]
+globals [colour counter node2-list existing-connections existing-paths]
 turtles-own [ team-number manager? visited?]
 
 to setup
@@ -18,6 +18,8 @@ to go
   add-new-people
   ;print existing-connections
   tick
+  nw:set-context turtles links
+  nw:save-matrix "example.txt"
 end
 
 to-report Degree-of-Connection
@@ -31,41 +33,6 @@ to-report Degree-of-Connection
   report 0
 end
 
-to-report Degree-of-Clustering
-  ifelse clustering-plot?
-  [
-      let sum-clustering 0
-
-      ask turtles [ set visited? false ]
-      ask turtles with [count link-neighbors > 1]
-      [
-        let myNeighbors  link-neighbors
-
-        let Kv ( count myNeighbors )
-        let possibleEdges ( Kv * ( Kv - 1) / 2 )
-
-        let actualEdges 0
-        ask myNeighbors [ set visited? true ]
-
-        ask myNeighbors
-        [
-          set actualEdges ( actualEdges + ( count link-neighbors with [ visited? = true] ) )
-        ]
-
-        ask myNeighbors [ set visited? false ]
-
-        set actualEdges ( actualEdges / 2 )
-        let clustering ( actualEdges / possibleEdges )
-        set sum-clustering (sum-clustering + clustering)
-
-      ]
-
-      let count-turtles ( count turtles )
-      report sum-clustering / count-turtles
-  ]
-;  ;report mean [ nw:clustering-coefficient ] of turtles
-  [ report 0 ]
-end
 
 to-report shortest-dist [node1 node2]
   let dist 0
@@ -73,10 +40,15 @@ to-report shortest-dist [node1 node2]
 
   if dist = false
   [ set dist 0]
+  if dist > 0
+  [ set existing-paths existing-paths + 1 ]
+
   report dist
 end
 
 to-report Degree-of-Separation
+  set existing-paths 0
+
   if separation-plot?
   [
      let sum-separation 0
@@ -90,8 +62,7 @@ to-report Degree-of-Separation
         ]
 
      ]
-
-     report sum-separation / ( ( count turtles ) * (count turtles - 1) )
+     report sum-separation / existing-paths
   ]
   report 0
 end
@@ -218,12 +189,12 @@ end
 @#$#@#$#@
 GRAPHICS-WINDOW
 260
-10
-541
-292
+1
+560
+302
 -1
 -1
-13.0
+13.905
 1
 10
 1
@@ -308,10 +279,10 @@ NIL
 HORIZONTAL
 
 PLOT
-3
-307
-203
-457
+36
+308
+316
+458
 Connection
 NIL
 NIL
@@ -393,25 +364,7 @@ NIL
 HORIZONTAL
 
 PLOT
-211
-308
-411
-458
- Clustering
-NIL
-NIL
-0.0
-10.0
-0.0
-1.0
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -13345367 true "" "plot Degree-of-Clustering"
-
-PLOT
-420
+351
 309
 620
 459
@@ -421,7 +374,7 @@ NIL
 0.0
 10.0
 0.0
-5.0
+10.0
 true
 false
 "" ""
@@ -429,32 +382,21 @@ PENS
 "default" 1.0 0 -5825686 true "" "plot Degree-of-Separation"
 
 SWITCH
-549
-17
-667
-50
+586
+66
+704
+99
 connection-plot?
 connection-plot?
-0
-1
--1000
-
-SWITCH
-551
-60
-672
-93
-clustering-plot?
-clustering-plot?
 1
 1
 -1000
 
 SWITCH
-548
-103
-673
-136
+586
+107
+711
+140
 separation-plot?
 separation-plot?
 0
@@ -462,9 +404,9 @@ separation-plot?
 -1000
 
 TEXTBOX
-547
+578
 152
-697
+728
 191
 Running more plots at a time may results in overflow and memory error
 10
@@ -490,6 +432,7 @@ density
 3. Each time [rate-of-interTeam-Connection] * number of edges are added **in a team**
 4. Each time [rate-of-connection] * number of people in team connections are added **in a team**
 5. Each time [add-people] number of people are added **in a team**
+* Managers form a clique
 
 
 ## Reporters
@@ -1028,6 +971,33 @@ NetLogo 6.3.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="clustering-plot?">
       <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="num-people">
+      <value value="20"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="experiment-9-v2" repetitions="50" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="50"/>
+    <metric>Degree-of-Separation</metric>
+    <enumeratedValueSet variable="Rate-of-connection">
+      <value value="0.4"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="add-people">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="connection-plot?">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Rate-of-interTeam-connection">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="separation-plot?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="num-teams">
+      <value value="10"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="num-people">
       <value value="20"/>
