@@ -388,7 +388,7 @@ SWITCH
 99
 connection-plot?
 connection-plot?
-1
+0
 1
 -1000
 
@@ -399,7 +399,7 @@ SWITCH
 140
 separation-plot?
 separation-plot?
-0
+1
 1
 -1000
 
@@ -995,6 +995,60 @@ NetLogo 6.3.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="separation-plot?">
       <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="num-teams">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="num-people">
+      <value value="20"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="experiment-10-Separation-v2" repetitions="50" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="50"/>
+    <metric>Degree-of-Separation</metric>
+    <enumeratedValueSet variable="Rate-of-connection">
+      <value value="0.4"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="add-people">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="connection-plot?">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Rate-of-interTeam-connection">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="separation-plot?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="num-teams">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="num-people">
+      <value value="20"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="experiment-10-Connection-v2" repetitions="50" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="50"/>
+    <metric>Degree-of-Connection</metric>
+    <enumeratedValueSet variable="Rate-of-connection">
+      <value value="0.4"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="add-people">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="connection-plot?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Rate-of-interTeam-connection">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="separation-plot?">
+      <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="num-teams">
       <value value="10"/>
