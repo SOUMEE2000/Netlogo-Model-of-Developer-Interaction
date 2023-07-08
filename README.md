@@ -12,7 +12,7 @@ A promising apporach to simulate such networks is to use the agent based paradig
 * Number of people to be added to be th team after each tick.
 * Number of random connections between teams
 
-Using these parameters, we have built a model that shows high congruence with characteristics that are shown by real world data obtained from software development projects like **Openstack, Android and Eclipse.**
+Using these parameters, we have built a model that shows high congruence with characteristics that are shown by real world data obtained from software development projects like **Openstack, Android and Eclipse.** My entire thesis is available [here.](file:///D:/Research/Subhajit%20Sir/01-ABM-Project/Bachelor's%20Thesis%20with%20all%20the%20Versions/Bachelor_s_thesis_final_version.pdf)
 
 <p>
 <img src="https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/blob/main/Images/Interface.png?raw=true" height = "400">
