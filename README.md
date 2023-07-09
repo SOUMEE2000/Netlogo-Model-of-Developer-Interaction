@@ -28,8 +28,8 @@ The Netlogo interface for one of the models is present down below.
 The outputs from these models have then been scaled by multiplying them with a scalar factor as real-world data is apt to be more dense than the what we have simulated. Using these parameters, we have built models that show high congruence with characteristics that are shown by real world data obtained from software development projects like **Openstack, Eclipse, Android**. The extensive validation on three different datasets of three different types of software development projects ( a Cloud platform, an IDE, and a mobile OS) lends more solidarity towards these models being closer to reality. The simulations of the metrics Connection and Separation along with what is observed in the real world is given below. The resemblance is striking!
 
 <p>
-  <img src = "https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/assets/52605586/69c0d446-8d77-467d-befd-2e87705f38b1" height = 450 width = 500>
-  <img src = "https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/assets/52605586/f8d2f526-5b88-45ee-903a-91d82b0247b2" height = 450 width = 500>
+  <img src = "https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/assets/52605586/69c0d446-8d77-467d-befd-2e87705f38b1" height = 400 width = 300>
+  <img src = "https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/assets/52605586/f8d2f526-5b88-45ee-903a-91d82b0247b2" height = 400 width = 300>
 </p>
 
 # Helper Tool
