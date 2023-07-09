@@ -3,7 +3,7 @@ This is my 4th year thesis on **"Agent based models of developer interaction in 
 
 A promising apporach to simulate such networks is to use the agent based paradigm. One tool to the implement said Agent Based Modelling paradigm is netlogo.
 
-# Main Model
+# Main Models
 
 **[Netlogo](https://ccl.northwestern.edu/netlogo/download.shtml).** This is an agent-based modelling software to simulate real world problems. Displayed beneath are pictures of the interface and the output graphs displaying the Degree of Connection. The model has five parameters that control how the network grows and evolves over time:
 * Rate-of-Connection
@@ -12,7 +12,8 @@ A promising apporach to simulate such networks is to use the agent based paradig
 * Number of people to be added to be th team after each tick.
 * Number of random connections between teams
 
-Using these parameters, we have built a model that shows high congruence with characteristics that are shown by real world data obtained from software development projects like **Openstack** My entire thesis is available [here.](https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/blob/main/Bachelor's%20Thesis/Bachelor_s_thesis_final_version.pdf)
+# Model Validation
+Using these parameters, we have built a model that shows high congruence with characteristics that are shown by real world data obtained from software development projects like **Openstack, Eclipse, Android** 
 
 <p>
 <img src="https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/blob/main/Images/Interface.png?raw=true" height = "400">
