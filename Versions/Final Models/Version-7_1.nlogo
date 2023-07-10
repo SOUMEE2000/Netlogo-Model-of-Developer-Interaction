@@ -66,6 +66,7 @@ to-report Degree-of-Separation
   ]
   report 0
 end
+
 to-report density
   let edges  ( count links)
   let vertices ( count turtles )
