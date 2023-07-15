@@ -1,7 +1,7 @@
 # Netlogo Models of Developer Interaction
-This is my 4th year thesis on **"Agent based models of developer interaction in large scale software ecosystems"**. The model shows the characteristic curves of some graph metrics like Connection, Separation. The software development industry is now in full bloom. With the influx of multi-million dollar enterprise-level projects, like ChatGPT, or Autonumous Driving Cars, huge networks of developers are becoming more and more common behind such projects to drive them to completion. We aim to understand these complex social processes for better disemmination of information between developers, identify bottlenecks in flow of information, allocation of resources and ease of governance.
+This is my 4th year thesis on **"Agent based models of developer interaction in large scale software ecosystems"**. The model calculates the variation of some network characteristics like Connection, Separation with respect to time. The software development industry is now in full bloom. With the influx of multi-million dollar enterprise-level projects, like ChatGPT, or Autonumous Driving Cars, huge networks of developers are becoming more and more common behind such projects to drive them to completion. We aim to understand these complex social processes for better disemmination of information between developers, identify bottlenecks in flow of information, allocation of resources and ease of governance.
 
-A promising apporach to simulate such networks is to use the agent based paradigm. One tool to the implement said Agent Based Modelling paradigm is netlogo.
+A promising apporach to understand such networks is to see if we can simulate them properly.  Creating such simulations can be done using the agent based modelling paradigm. One tool to the implement said Agent Based Modelling paradigm is netlogo.
 
 # Main Models
 <p>
@@ -26,8 +26,6 @@ The Netlogo interface for one of the models is present down below.
 
 # Model Validation
 **Datasets used:** Openstack, Eclipse, Android
-
-**Network characterisitcs that the simulations measured:** Connection and Separation
 
 The outputs from these models have then been scaled by multiplying them with a scalar factor as real-world data is apt to be more dense than the what we have simulated. Using these parameters, we have built models that show high congruence with characteristics that are shown by real world data obtained from software development projects like **Openstack, Eclipse, Android**. The extensive validation on three different datasets of three different types of software development projects ( a Cloud platform, an IDE, and a mobile OS) lends more solidarity towards these models being closer to reality.
 
