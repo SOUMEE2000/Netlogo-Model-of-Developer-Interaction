@@ -36,6 +36,9 @@ To work with the idea of social networks in computer science we abstract these n
   <img src = "https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/assets/52605586/f8d2f526-5b88-45ee-903a-91d82b0247b2" height = 400 width = 400>
 </p>
 
+# Workflow in Short
+![image](https://github.com/SOUMEE2000/Netlogo-Model-of-Developer-Interaction/assets/52605586/534bf675-484f-41c8-88e0-78818fac7bc2)
+
 # Helper Tool
 Netlogo spills out csv data while running experiments on model parameters. However, said data is very messy. This is a UI, built on streamlit and deployed on the streamlit cloud at [Behavioural Space Parser](https://soumee2000-netlogo-models-of-deve-helper-toolapplication-0d427y.streamlit.app/) that can appropriately parse the csv files. The code is available in the Helper Tool folder. It can be downloaded and running the following at your terminal will get it fired up.
 ```
