@@ -1,4 +1,4 @@
-# Netlogo Models of Developer Interaction
+# Netlogo Models of Developer Interaction - Context
 This is my 4th year thesis on **"Agent based models of developer interaction in large scale software ecosystems"**. The model calculates the variation of some network characteristics like Connection, Separation with respect to time. The software development industry is now in full bloom. With the influx of multi-million dollar enterprise-level projects, like ChatGPT, or Autonumous Driving Cars, huge networks of developers are becoming more and more common behind such projects to drive them to completion. We aim to understand these complex social processes for better disemmination of information between developers, identify bottlenecks in flow of information, allocation of resources and ease of governance.
 
 A promising apporach to understand such networks is to see if we can simulate them properly.  Creating such simulations can be done using the agent based modelling paradigm. One tool to the implement said Agent Based Modelling paradigm is netlogo.
