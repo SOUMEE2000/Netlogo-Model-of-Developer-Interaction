@@ -76,12 +76,12 @@ end
 
 to setup-nodes
   set counter 0
-  repeat num-teams[
+  repeat T[
     set colour  ( 13 + random 126)
     if (colour mod 10) < 3  [ set colour  (colour + 3)]
     let x-ord random-pxcor * 0.85
     let y-ord random-pycor * 0.85
-    crt num-people[
+    crt N[
       set color colour
       set size 1.5
       set team-number counter
@@ -111,7 +111,7 @@ to setup-manager-links
     ask turtles [ set visited? false]
     let node1 one-of turtles with [manager? = 1]
 
-    repeat num-teams [
+    repeat T [
       ask node1 [ set visited? true ]
       set node2-list  ( one-of turtles with[manager? = 1 and not link-neighbor? node1 and count my-links < 2 and visited? = false])
       if node2-list != nobody
@@ -129,9 +129,9 @@ end
 ; GO PROCEDURES
 
 to add-new-people
-  ;repeat add-people[
+  ;repeat I[
     ask one-of turtles [
-    hatch add-people
+    hatch I
     ]
   ;]
 end
@@ -144,7 +144,7 @@ to make-team-connections
     set visited? true
     let team-mates (turtles with [team-number = [team-number] of myself])
     let num-turtles (count team-mates)
-    let num (Rate-of-connection * num-turtles)
+    let num (C * num-turtles)
 
 
     while [ num > 0 ]
@@ -172,7 +172,7 @@ to make-inter-team-connections
   [
 
     set visited? true
-    let num (Rate-of-interTeam-connection * existing-connections)
+    let num (A * existing-connections)
 
 
     while [ num > 0 ]
@@ -243,8 +243,8 @@ SLIDER
 145
 121
 178
-num-people
-num-people
+N
+N
 0
 50
 20.0
@@ -275,8 +275,8 @@ SLIDER
 187
 123
 220
-Rate-of-connection
-Rate-of-connection
+C
+C
 0
 1
 0.4
@@ -308,8 +308,8 @@ SLIDER
 145
 247
 178
-num-teams
-num-teams
+T
+T
 0
 100
 10.0
@@ -323,8 +323,8 @@ SLIDER
 186
 251
 219
-add-people
-add-people
+I
+I
 0
 100
 5.0
@@ -360,8 +360,8 @@ SLIDER
 229
 237
 262
-Rate-of-interTeam-connection
-Rate-of-interTeam-connection
+A
+A
 0
 1
 0.1
