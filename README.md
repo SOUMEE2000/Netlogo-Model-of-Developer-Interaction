@@ -21,7 +21,7 @@ We assume that a software development ecosystem is divided into many modules, on
 The Netlogo interface for one of the models is present down below.
 
 <p>
-<img src="https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/blob/main/Images/Interface.png?raw=true" height = "400" label = "The Netlogo Interface">
+<img src="https://github.com/SOUMEE2000/Netlogo-Model-of-Developer-Interaction/blob/main/assets/interface.png?raw=true" height = "400" label = "The Netlogo Interface">
 </p>
 
 # Model Validation
