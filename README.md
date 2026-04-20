@@ -34,6 +34,7 @@ To work with the idea of social networks in computer science we abstract these n
 <p>
   <img src = "https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/assets/52605586/69c0d446-8d77-467d-befd-2e87705f38b1" height = 400 width = 400>
   <img src = "https://github.com/SOUMEE2000/Netlogo-Models-of-Developer-Interaction/assets/52605586/f8d2f526-5b88-45ee-903a-91d82b0247b2" height = 400 width = 400>
+  <img src = "https://github.com/SOUMEE2000/Netlogo-Model-of-Developer-Interaction/blob/main/assets/Clustering-simulation-vs-empirical.png" height = 400 width = 400>
 </p>
 
 # Workflow in Short
